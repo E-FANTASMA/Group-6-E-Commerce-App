@@ -1,6 +1,6 @@
 // components/account-settings/PersonalInfoForm.tsx
 
-import Image from 'next/image'
+
 import SectionCard from './SectionCard'
 
 export default function PersonalInfoForm() {
@@ -14,8 +14,8 @@ export default function PersonalInfoForm() {
       <div className="flex gap-8">
         {/* Avatar */}
         <div className="flex flex-col items-center gap-2 min-w-30">
-          <Image
-            src="/avatar.jpg"
+          <img
+            src="https://i.pravatar.cc/150?img=68"
             alt="John Doe"
             width={90}
             height={90}

@@ -1,6 +1,4 @@
 
-import Image from 'next/image'
-
 export default function PageHeader() {
   return (
     <div className="flex items-center justify-between mb-8">
@@ -18,8 +16,8 @@ export default function PageHeader() {
         </button>
 
         <div className="flex items-center gap-3">
-          <Image
-            src="/avatar.jpg"
+          <img
+            src="https://i.pravatar.cc/150?img=68"
             alt="John Doe"
             width={40}
             height={40}

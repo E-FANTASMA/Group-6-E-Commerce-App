@@ -1,6 +1,3 @@
-
-
-import Image from 'next/image'
 import SectionCard from './SectionCard'
 
 export default function ProfilePreview() {
@@ -13,8 +10,8 @@ export default function ProfilePreview() {
 
       <div className="border border-gray-200 rounded-xl p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Image
-            src="/avatar.jpg"
+          <img
+            src="https://i.pravatar.cc/150?img=68"
             alt="John Doe"
             width={56}
             height={56}
