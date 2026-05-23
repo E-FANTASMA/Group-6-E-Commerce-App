@@ -4,10 +4,9 @@
 > Department of Software Engineering | Second Semester
 
 ## Project Description
+E-Fantasma is a lightweight mini e-commerce platform that allows users to browse products, manage a cart, and simulate checkout.
 
-This is a full-stack Mini E-Commerce web application that allows users to browse products, add items to a cart, and make purchases. 
-
-The application is built using modern JavaScript technologies including React for the frontend and Node.js for the backend.
+It was built as a learning project to demonstrate full-stack development with React and Node.js.
 
 ---
 
@@ -56,9 +55,10 @@ Backend:
 Database:
 - Supabase SQL
 
-Styling: 
+Styling:
+-  Tailwind CSS
 
-Tools:
+Version Control:
 - Git & GitHub
 
 ---
@@ -233,8 +233,22 @@ Bugs were documented and resolved using GitHub Issues.
 - `qa/*` — testing and documentation branches
 - All changes go through **Pull Requests** before merging
 
+
 ## Project Status
-In Development 
+
+> Last updated: May 23, 2026
+
+| Feature | Status |
+|---|---|
+| Product Listing Page |   |
+| User Authentication |  |
+| Shopping Cart |   |
+| Checkout Flow |   |
+| Order History |   |
+
+**Overall:** Core features are underway. Target completion before final submission deadline.
+
+
 
 ## License
 
