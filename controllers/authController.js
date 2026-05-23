@@ -9,10 +9,12 @@ const { validateData, signupSchema, loginSchema } = require('../utils/validation
  */
 const signup = async (req, res) => {
   try {
-    // Validate input
+    // 1) Validate incoming payload against the Joi schema (required fields, formats, etc.)
+    //    This helps us fail fast before doing any DB work.
     const { value, error } = validateData(req.body, signupSchema);
 
     if (error) {
+      // Joi can return multiple validation errors; map them into a clean array for the client.
       const messages = error.details.map((detail) => detail.message);
       return res.status(400).json({
         success: false,
@@ -21,9 +23,10 @@ const signup = async (req, res) => {
       });
     }
 
+    // Use the validated/coerced values (not raw req.body).
     const { fullName, email, password, phoneNumber } = value;
 
-    // Check if user already exists
+    // 2) Check if the email is already in use to prevent duplicate accounts.
     const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return res.status(409).json({
@@ -32,20 +35,23 @@ const signup = async (req, res) => {
       });
     }
 
-    // Hash password
+    // 3) Hash the password before saving. We never store raw/plaintext passwords.
     const hashedPassword = await hashPassword(password);
 
-    // Create user
+    // 4) Create the user record in the database.
+    //    Note: field names here match the DB schema (snake_case).
     const result = await User.create({
       full_name: fullName,
       email: email.toLowerCase(),
       password_hash: hashedPassword,
       phone_number: phoneNumber || null,
+      role: 'user',
       created_at: new Date(),
       updated_at: new Date(),
     });
 
     if (!result.success) {
+      // If the model layer reports a failure, return a server error to the client.
       return res.status(500).json({
         success: false,
         message: 'Failed to create user',
@@ -53,17 +59,19 @@ const signup = async (req, res) => {
       });
     }
 
-    // Generate JWT token
+    // 5) Generate a JWT so the user can be immediately authenticated after signup.
+    //    Keep the token payload minimal (only what the app needs).
     const token = generateToken(
       {
         id: result.data.id,
         email: result.data.email,
         fullName: result.data.full_name,
+        role: result.data.role,
       },
       '7d'
     );
 
-    // Return success response
+    // 6) Return a safe response (do not include password hashes or sensitive fields).
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
@@ -72,6 +80,7 @@ const signup = async (req, res) => {
         fullName: result.data.full_name,
         email: result.data.email,
         phoneNumber: result.data.phone_number,
+        role: result.data.role,
         token,
       },
     });
@@ -130,6 +139,7 @@ const login = async (req, res) => {
         id: user.id,
         email: user.email,
         fullName: user.full_name,
+        role: user.role,
       },
       '7d'
     );
@@ -143,6 +153,7 @@ const login = async (req, res) => {
         fullName: user.full_name,
         email: user.email,
         phoneNumber: user.phone_number,
+        role: user.role,
         token,
       },
     });
