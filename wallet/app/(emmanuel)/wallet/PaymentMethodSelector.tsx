@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 
 const methods = [
   {
@@ -21,6 +24,12 @@ const methods = [
 ]
 
 export default function PaymentMethodSelector() {
+  const [selected, setSelected] = useState<string | null>(null)
+
+  const handleSelect = (id: string) => {
+    setSelected(selected === id ? null : id)
+  }
+
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-4">
@@ -34,8 +43,26 @@ export default function PaymentMethodSelector() {
         {methods.map((method) => (
           <div
             key={method.id}
-            className="border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-green-500 hover:bg-green-50 transition-colors"
+            onClick={() => handleSelect(method.id)}
+            className={`relative border rounded-xl p-4 cursor-pointer transition-colors ${
+              selected === method.id
+                ? 'border-green-500 bg-green-50'
+                : 'border-gray-200 hover:border-green-300 hover:bg-green-50'
+            }`}
           >
+            {/* Tick indicator */}
+            <div className={`absolute top-3 right-3 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
+              selected === method.id
+                ? 'bg-green-600 border-green-600'
+                : 'border-gray-300 bg-white'
+            }`}>
+              {selected === method.id && (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </div>
+
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-700 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
             </svg>
