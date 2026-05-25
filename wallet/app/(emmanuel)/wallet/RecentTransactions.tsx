@@ -6,35 +6,35 @@ const transactions = [
     id: 1,
     type: 'Wallet Funding',
     date: 'May 11, 2026 • 10:13 AM',
-    amount: '+20,000',
+    amount: '20,000',
     positive: true,
   },
   {
     id: 2,
     type: 'Store Payment',
     date: 'May 9, 2026 • 7:18 PM',
-    amount: '-65,000',
+    amount: '65,000',
     positive: false,
   },
   {
     id: 3,
     type: 'Wallet Funding',
     date: 'May 2, 2026 • 5:42 PM',
-    amount: '+5,000',
+    amount: '5,000',
     positive: true,
   },
   {
     id: 4,
     type: 'Store Payment',
     date: 'April 21, 2026 • 10:42 PM',
-    amount: '-160,000',
+    amount: '160,000',
     positive: false,
   },
   {
     id: 5,
     type: 'Wallet Funding',
     date: 'April 9, 2026 • 08:11 AM',
-    amount: '+450,000',
+    amount: '450,000',
     positive: true,
   },
 ]
@@ -55,7 +55,7 @@ export default function RecentTransactions() {
                   </svg>
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
                 )}
               </div>
@@ -65,7 +65,7 @@ export default function RecentTransactions() {
               </div>
             </div>
             <span className={`text-sm font-bold ${tx.positive ? 'text-green-600' : 'text-red-600'}`}>
-              {tx.positive ? '+' : ''}{tx.amount}
+              {tx.positive ? '+' : '-'} {tx.amount}
             </span>
           </div>
         ))}
