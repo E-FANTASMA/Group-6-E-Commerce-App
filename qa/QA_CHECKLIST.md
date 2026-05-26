@@ -4,21 +4,21 @@
 ## Backend API
 
 ### Auth
-- [ ] POST /api/auth/signup — registers a new user successfully
-- [ ] POST /api/auth/signup — fails with 400 if fields are missing
-- [ ] POST /api/auth/signup — fails with 409 if email already exists
-- [ ] POST /api/auth/login — logs in with correct credentials
-- [ ] POST /api/auth/login — fails with 401 if password is wrong
-- [ ] GET /api/auth/verify — returns 200 with valid token
-- [ ] GET /api/auth/verify — returns 401 with no token or expired token
+- [x] POST /api/auth/signup — registers a new user successfully
+- [x] POST /api/auth/signup — fails with 400 if fields are missing
+- [x] POST /api/auth/signup — fails with 409 if email already exists
+- [x] POST /api/auth/login — logs in with correct credentials
+- [x] POST /api/auth/login — fails with 401 if password is wrong
+- [x] GET /api/auth/verify — returns 200 with valid token
+- [x] GET /api/auth/verify — returns 401 with no token or expired token
 
 ### Products
-- [ ] GET /api/products — returns all products when logged in
-- [ ] GET /api/products?maxPrice=100000 — filters by max price
-- [ ] GET /api/products?category=Travel — filters by category
-- [ ] GET /api/products?sortBy=price&sortOrder=asc — sorts correctly
-- [ ] GET /api/products/categories — returns list of categories
-- [ ] GET /api/products — fails with 401 if not logged in
+- [x] GET /api/products — returns all products when logged in
+- [x] GET /api/products?maxPrice=100000 — filters by max price
+- [x] GET /api/products?category=Travel — filters by category
+- [x] GET /api/products?sortBy=price&sortOrder=asc — sorts correctly
+- [x] GET /api/products/categories — returns list of categories
+- [x] GET /api/products — fails with 401 if not logged in
 
 ### Cart
 - [ ] GET /api/cart — returns current cart
