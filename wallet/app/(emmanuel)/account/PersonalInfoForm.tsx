@@ -15,10 +15,12 @@ const defaultData = {
 export default function PersonalInfoForm() {
   const [form, setForm] = useState(defaultData)
   const [saved, setSaved] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('profileData')
     if (stored) setForm(JSON.parse(stored))
+    setMounted(true)
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -56,13 +58,12 @@ export default function PersonalInfoForm() {
       </p>
 
       <div className="flex gap-8">
-        {/* Avatar */}
         <div className="flex flex-col items-center gap-2 min-w-[120px]">
           <div className="relative">
             <img
-              src={form.avatar || 'https://i.pravatar.cc/150?img=68'}
-              alt="John Doe"
-              className="rounded-full object-cover w-[90px] h-[90px]"
+              src={!mounted ? '' : (form.avatar || 'https://i.pravatar.cc/150?img=68')}
+              alt="Profile"
+              className={`rounded-full object-cover w-[90px] h-[90px] transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
             />
             <label className="absolute bottom-0 right-0 w-7 h-7 bg-green-700 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-800">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,79 +86,31 @@ export default function PersonalInfoForm() {
           <p className="text-xs text-gray-500">{form.phone}</p>
         </div>
 
-        {/* Form fields */}
         <div className="flex-1 grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              value={form.fullName}
-              onChange={handleChange}
-              className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500"
-            />
+            <input type="text" name="fullName" value={form.fullName} onChange={handleChange} className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500" />
           </div>
-
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Email address</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500"
-            />
+            <input type="email" name="email" value={form.email} onChange={handleChange} className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500" />
           </div>
-
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Phone Number</label>
-            <input
-              type="tel"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500"
-            />
+            <input type="tel" name="phone" value={form.phone} onChange={handleChange} className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500" />
           </div>
-
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Date of Birth</label>
-            <input
-              type="text"
-              name="dob"
-              value={form.dob}
-              onChange={handleChange}
-              className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500"
-            />
+            <input type="text" name="dob" value={form.dob} onChange={handleChange} className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500" />
           </div>
-
           <div className="flex flex-col gap-1 col-span-2">
             <label className="text-sm font-medium text-gray-700">Bio</label>
-            <textarea
-              name="bio"
-              value={form.bio}
-              onChange={handleChange}
-              rows={3}
-              className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500 resize-none"
-            />
+            <textarea name="bio" value={form.bio} onChange={handleChange} rows={3} className="border border-gray-200 rounded-lg px-4 py-2 text-sm outline-none focus:border-green-500 resize-none" />
           </div>
-
           <div className="col-span-2 flex justify-end items-center gap-3 mt-2">
-            {saved && (
-              <span className="text-sm text-green-600 font-medium">Changes saved!</span>
-            )}
-            <button
-              onClick={handleCancel}
-              className="px-6 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSave}
-              className="px-6 py-2 rounded-lg bg-green-700 text-white text-sm font-semibold hover:bg-green-800"
-            >
-              Save Changes
-            </button>
+            {saved && <span className="text-sm text-green-600 font-medium">Changes saved!</span>}
+            <button onClick={handleCancel} className="px-6 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+            <button onClick={handleSave} className="px-6 py-2 rounded-lg bg-green-700 text-white text-sm font-semibold hover:bg-green-800">Save Changes</button>
           </div>
         </div>
       </div>
