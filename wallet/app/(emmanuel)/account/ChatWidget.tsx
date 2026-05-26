@@ -58,8 +58,8 @@ export default function ChatWidget() {
             <div>
               <p className="text-white text-sm font-semibold">Vale Support</p>
               <div className="flex items-center gap-1">
-                <span className="w-2 h-2 bg-green-300 rounded-full"></span>
-                <p className="text-green-200 text-xs">Online</p>
+                <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                <p className="text-green-200 text-xs">Offline</p>
               </div>
             </div>
           </div>
