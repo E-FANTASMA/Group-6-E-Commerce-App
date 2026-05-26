@@ -4,7 +4,7 @@
 > Department of Software Engineering | Second Semester
 
 ## Project Description
-E-Fantasma is a lightweight mini e-commerce platform that allows users to browse products, manage a cart, and simulate checkout.
+Vale is a lightweight mini e-commerce platform that allows users to browse products, manage a cart, and simulate checkout.
 
 It was built as a learning project to demonstrate full-stack development with React and Node.js.
 
