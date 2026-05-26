@@ -1,5 +1,33 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 
 export default function PageHeader() {
+  const [profile, setProfile] = useState({
+    fullName: 'John Doe',
+    avatar: '',
+  })
+
+  useEffect(() => {
+    const stored = localStorage.getItem('profileData')
+    if (stored) {
+      const data = JSON.parse(stored)
+      setProfile({ fullName: data.fullName, avatar: data.avatar })
+    }
+
+    // Listen for storage changes so it updates when form saves
+    const handleStorage = () => {
+      const updated = localStorage.getItem('profileData')
+      if (updated) {
+        const data = JSON.parse(updated)
+        setProfile({ fullName: data.fullName, avatar: data.avatar })
+      }
+    }
+
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
+  }, [])
+
   return (
     <div className="flex items-center justify-between mb-8">
       <div>
@@ -17,13 +45,11 @@ export default function PageHeader() {
 
         <div className="flex items-center gap-3">
           <img
-            src="https://i.pravatar.cc/150?img=68"
-            alt="John Doe"
-            width={40}
-            height={40}
-            className="rounded-full object-cover"
+            src={profile.avatar || 'https://i.pravatar.cc/150?img=68'}
+            alt={profile.fullName}
+            className="rounded-full object-cover w-[40px] h-[40px]"
           />
-          <span className="font-medium text-gray-900">John Doe</span>
+          <span className="font-medium text-gray-900">{profile.fullName}</span>
           <span className="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
             Admin
           </span>
