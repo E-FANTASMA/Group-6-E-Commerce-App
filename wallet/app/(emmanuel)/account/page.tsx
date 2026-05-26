@@ -1,3 +1,4 @@
+'use client'
 
 import PageLayout from './PageLayout'
 import PageHeader from './PageHeader'
@@ -6,6 +7,9 @@ import ProfilePreview from './ProfilePreview'
 import AccountSummary from './AccountSummary'
 import TransactionsCard from './TransactionsCard'
 import HelpSupport from './HelpSupport'
+import ChatWidget from './ChatWidget'
+
+
 
 export default function AccountSettingsPage() {
   return (
@@ -26,6 +30,7 @@ export default function AccountSettingsPage() {
           </>
         }
       />
+      <ChatWidget />
     </div>
   )
 }
