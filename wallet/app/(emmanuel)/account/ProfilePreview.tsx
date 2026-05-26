@@ -25,7 +25,7 @@ export default function ProfilePreview() {
       <div className="border border-gray-200 rounded-xl p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img
-            src={!mounted ? '' : (profile.avatar || 'https://i.pravatar.cc/150?img=68')}
+            src={mounted ? (profile.avatar || 'https://i.pravatar.cc/150?img=68') : 'https://i.pravatar.cc/150?img=68'}
             alt={profile.fullName}
             className={`rounded-full object-cover w-[56px] h-[56px] transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
           />

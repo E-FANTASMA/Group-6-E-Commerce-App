@@ -61,7 +61,7 @@ export default function PersonalInfoForm() {
         <div className="flex flex-col items-center gap-2 min-w-[120px]">
           <div className="relative">
             <img
-              src={!mounted ? '' : (form.avatar || 'https://i.pravatar.cc/150?img=68')}
+              src={mounted ? (form.avatar || 'https://i.pravatar.cc/150?img=68') : 'https://i.pravatar.cc/150?img=68'}
               alt="Profile"
               className={`rounded-full object-cover w-[90px] h-[90px] transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
             />

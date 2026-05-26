@@ -40,7 +40,7 @@ export default function PageHeader() {
         </button>
         <div className="flex items-center gap-3">
           <img
-            src={!mounted ? '' : (profile.avatar || 'https://i.pravatar.cc/150?img=68')}
+            src={mounted ? (profile.avatar || 'https://i.pravatar.cc/150?img=68') : 'https://i.pravatar.cc/150?img=68'}
             alt={profile.fullName}
             className={`rounded-full object-cover w-[40px] h-[40px] transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
           />
