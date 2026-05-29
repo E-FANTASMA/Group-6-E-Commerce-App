@@ -52,14 +52,27 @@ src/
 ├── react-app-env.d.ts       # CRA type references
 │
 ├── pages/
-│   ├── SplashPage.tsx       Complete
-│   ├── LoginPage.tsx        Complete
-│   ├── SignupPage.tsx       Complete
-│   ├── HomePage.tsx         Complete
+│   ├── SplashPage.tsx        Complete
+│   ├── LoginPage.tsx         Complete
+│   ├── SignupPage.tsx        Complete
+│   └── HomePage.tsx          Complete
+│
+└── assets/
+    ├── leaves.jpg
+    ├── clothes.jpg
+    ├── texting.jpg
+    ├── homepage phone.jpg
+    ├── fashion-circle.jpg
+    ├── phone circle.jpg
+    ├── beauty-circle.jpg
+    └── home-circle.jpg
+```
+
+---
 
 ## Pages & Features
 
-### SplashPage '/'
+### SplashPage `/`
 
 The entry point of the application. Designed as a full-screen landing experience.
 
@@ -105,8 +118,9 @@ A split-panel registration screen — mirror layout to the Login page, with form
 
 ### HomePage `/home`
 
-
 The main screen users land on after authentication. Designed as a **mobile-first phone shell** that simulates a native app experience inside the browser.
+
+**Assets Used**
 
 | Import | File | Role |
 |---|---|---|
@@ -116,9 +130,7 @@ The main screen users land on after authentication. Designed as a **mobile-first
 | `beautyCircle` | `beauty-circle.jpg` | Beauty category avatar |
 | `homeCircle` | `home-circle.jpg` | Home category avatar |
 
----
-
-### Layout Structure
+**Layout Structure**
 
 ```
 HomePage
@@ -134,26 +146,63 @@ HomePage
 │   │   ├── Section Header  — "New Arrivals"
 │   │   └── Products Grid   — 2-column grid of 4 product cards
 │   └── Bottom Nav Bar      — Home | Shop | Cart | Account
-``
+```
 
-### Styling Notes
+**Styling Notes**
 
 - **Font stack:** `Inter` (UI), `Plaster` (logo), `Cormorant Garamond` (imported but not used on this page)
 - **Phone shell:** fixed 375px width, `min-height: 812px`, `border-radius: 0`, centered on a `#2b1d18` dark background
 - **Bottom nav:** `position: fixed` at the bottom, `width: 375px` — matches the phone shell width
-- **Color palette inherited from app design system:**
+
+---
+
+## Design System
 
 | Token | Value | Usage |
 |---|---|---|
-| Primary Green | `#1a4d2e` | Active nav, logo |
-| Accent Green | `#2d7a4f` | Logo accent, hero text |
+| Primary Green | `#1a4d2e` | Active nav, logo, headings |
+| Accent Green | `#2d7a4f` | Logo accent, hero text, buttons |
 | Warm Sand | `#f5f2ec` | Page/shell background |
 | Price Red | `#c0392b` | Product price text |
 | Border | `#e6e1db` | Input borders, nav divider |
 
 ---
 
-### Work in Progress
+## Routing
+
+```
+/              → SplashPage
+/signup        → SignupPage
+/login         → LoginPage
+/product/:id   → ProductDetailPage
+/cart          → CartPage
+/checkout      → CheckoutPage
+/confirmation  → ConfirmationPage
+```
+
+---
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+# Run tests
+npm test
+
+# Build for production
+npm run build
+```
+
+The app will run at `http://localhost:3000` by default.
+
+---
+
+## Work in Progress
 
 - [ ] Hero banner CTA — wire up `EXPLORE COLLECTION` button navigation
 - [ ] Real product images — replace placeholder color blocks with actual assets
@@ -165,4 +214,15 @@ HomePage
 - [ ] "See all" link — navigate to full categories list
 - [ ] Horizontal scroll snap — improve UX on category row
 - [ ] Responsive layout — adapt phone shell for desktop/tablet views
+- [ ] ProductDetailPage — product imagery, description, size/colour selection, add to cart
+- [ ] CartPage — item list, quantity controls, order summary
+- [ ] CheckoutPage — shipping and payment form
+- [ ] ConfirmationPage — order success state
+- [ ] Authentication backend integration (currently client-side only)
+- [ ] "Forgot password" flow
+- [ ] Social OAuth integration
+- [ ] Global state management (cart, auth session)
 
+---
+
+*Vale is currently in active development. This README reflects the state of the project as of the files reviewed.*
