@@ -3,6 +3,8 @@
 > CSC 202 – Computer Programming II | Group 6 Project  
 > Department of Software Engineering | Second Semester
 
+
+
 ## Project Description
 Vale is a lightweight mini e-commerce platform that allows users to browse products, manage a cart, and simulate checkout.
 
@@ -19,10 +21,28 @@ It was built as a learning project to demonstrate full-stack development with Re
 | FEMI-SIPE Oluwatamilore | 24120112022 |Frontend |
 | GABRIEL-LOUIS Onyedikachi | 24120112023 | DevOps Integration |
 | MBAMA Elsie | 24120112029 | Frontend |
-| OJO Jeremiah | 25120112060 | Backend |
+| OJO Jeremiah | 25120112060 | Team Lead/Backend |
 | OSEGHALE Nehireme | 24120112048 | QA/Documentation |
 | AGOLO Oghenerukevwe | 24120112006 | QA/Documentation |
 | YAKUBU Emmanuel | 24120112059 | Frontend |
+
+---
+
+## Project Description
+
+mini-ecommerce/
+├── client/               # React + TypeScript frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── App.tsx
+│   └── package.json
+├── server/               # Node.js + Express backend
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   └── index.js
+└── README.md
 
 ---
 
@@ -240,13 +260,13 @@ Bugs were documented and resolved using GitHub Issues.
 
 | Feature | Status |
 |---|---|
-| Product Listing Page |   |
-| User Authentication |  |
-| Shopping Cart |   |
-| Checkout Flow |   |
-| Order History |   |
+| Product Listing Page | Done |
+| User Authentication | Done |
+| Shopping Cart | Done |
+| Checkout Flow |Done |
+| Order History | Done |
 
-**Overall:** Core features are underway. Target completion before final submission deadline.
+**Overall:** Core features are done. Target completion before final submission deadline.
 
 
 
@@ -254,5 +274,3 @@ Bugs were documented and resolved using GitHub Issues.
 
 This project was built for academic purposes — COS 202, University project.
 
-
-## Live Demo
