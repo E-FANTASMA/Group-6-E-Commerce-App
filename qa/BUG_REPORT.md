@@ -9,3 +9,4 @@
 | BUG-01 | Signup fails — Supabase not connecting | POST /api/auth/signup | 201 success | 500 fetch failed | Fixed ✅ |
 | BUG-03 | Cart, Wallet, Checkout, Orders all return 500 | Run node qa/api.test.js | All pass | 500 server errors | Open |
 | BUG-04 | Cart returns 500 — missing database table | GET /api/cart with valid token in Postman | 200 cart data returned | 500 — Could not find table public.cart_items in schema cache | Open |
+| BUG-05 | POST /api/cart/items rejects productId and quantity as invalid fields |001POST /api/cart/items rejects productId and quantity as invalid fields | Item added to cart successfully |400 Validation Failed — productId and quantity not allowed | Open |

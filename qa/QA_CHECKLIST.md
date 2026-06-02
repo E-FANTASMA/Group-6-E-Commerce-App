@@ -21,33 +21,33 @@
 - [x] GET /api/products — fails with 401 if not logged in
 
 ### Cart
-- [ ] GET /api/cart — returns current cart
-- [ ] POST /api/cart/items — adds item to cart successfully
+- [x] GET /api/cart — returns current cart
+- [x] POST /api/cart/items — adds item to cart successfully
 - [ ] POST /api/cart/items — fails if productId is missing
 - [ ] PUT /api/cart/items/:itemId — updates item quantity
 - [ ] DELETE /api/cart/items/:itemId — removes item from cart
-- [ ] DELETE /api/cart/clear — clears entire cart
+- [x] DELETE /api/cart/clear — clears entire cart
 
 ### Wallet
-- [ ] GET /api/wallet — returns wallet balance
-- [ ] POST /api/wallet/top-up — funds wallet with demo money
-- [ ] GET /api/wallet/transactions — returns transaction history
+- [x] GET /api/wallet — returns wallet balance
+- [x] POST /api/wallet/top-up — funds wallet with demo money
+- [x] GET /api/wallet/transactions — returns transaction history
 
 ### Checkout
-- [ ] GET /api/checkout/preview — returns cart totals and wallet balance
-- [ ] POST /api/checkout — completes checkout successfully
-- [ ] POST /api/checkout — fails if wallet balance is insufficient
+- [x] GET /api/checkout/preview — returns cart totals and wallet balance
+- [x] POST /api/checkout — completes checkout successfully
+- [x] POST /api/checkout — fails if wallet balance is insufficient
 
 ### Orders
-- [ ] GET /api/orders — returns all orders for logged in user
-- [ ] GET /api/orders/:orderId — returns a single order correctly
+- [x] GET /api/orders — returns all orders for logged in user
+- [x] GET /api/orders/:orderId — returns a single order correctly
 
 ## Frontend Pages
-- [ ] Home/Product page loads correctly
-- [ ] Cart page shows correct items and total
-- [ ] Checkout page submits correctly
-- [ ] All pages are mobile friendly
-- [ ] No broken links or blank pages
+- [x] Home/Product page loads correctly
+- [x] Cart page shows correct items and total
+- [x] Checkout page submits correctly
+- [x] All pages are mobile friendly
+- [x] No broken links or blank pages
 
 ## General
 - [ ] App loads without errors
