@@ -376,7 +376,7 @@ Order Total: ₦${Number(
             {step === "payment-selection" && (
               <motion.div key="pay" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="bg-white/80 border border-[#E7DBD0] rounded-[2rem] p-5 md:p-6 shadow-[0_15px_40px_rgba(75,67,61,0.04)]">
                 <h2 className="text-xl font-bold font-cormorant text-[#214F34]">Payment</h2>
-                <p className="text-xs text-[#8D8178] mt-1">This is a UI demo. Integrate payment gateway later.</p>
+                
                 <div className="mt-5 grid gap-3">
                   <div className="rounded-2xl border border-[#E7DBD0]/70 bg-white/70 p-4">
                     <div className="font-bold text-sm">
