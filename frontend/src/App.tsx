@@ -13,6 +13,11 @@ import CustomersPage from './pages/CustomersPage';
 import SettingsPage from './pages/SettingsPage';
 import { getAuthToken } from './api/auth';
 import WalletPage from './pages/WalletPage';
+import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
+
+import AdminDashboardPage from './pages/AdminDashboardPage'
+import AdminOrdersPage from './pages/AdminOrdersPage'
 
 function App() {
   const token = getAuthToken();
