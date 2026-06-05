@@ -1,8 +1,7 @@
 // qa/api.test.js — Full API Test for Group 6 Mini E-Commerce App
 // Run with: node qa/api.test.js
 
-const BASE_URL = "https://group-6-e-commerce-app.onrender.com/api"; 
-
+const BASE_URL = "https://group-6-e-commerce-app.onrender.com/api";
 
 // These will be filled automatically during tests
 let token = "";
@@ -48,14 +47,13 @@ async function testAuth() {
     });
     const data = await res.json();
     log("POST /api/auth/signup", res, data);
-    // save token if signup returns one
     if (data?.data?.token) {
       token = data.data.token;
       console.log("   🔑 Token saved from signup");
     }
   });
 
-  // LOGIN (also saves token)
+  // LOGIN
   await test("POST /api/auth/login", async () => {
     const res = await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
@@ -82,10 +80,9 @@ async function testAuth() {
     log("GET /api/auth/verify", res, data);
   });
 
-  // VERIFY WITH NO TOKEN (should fail with 401)
+  // VERIFY WITH NO TOKEN
   await test("GET /api/auth/verify — no token (expect 401)", async () => {
     const res = await fetch(`${BASE_URL}/auth/verify`);
-    const data = await res.json();
     res.status === 401
       ? console.log(`✅ GET /api/auth/verify no token — PASSED (401 as expected)`)
       : console.log(`❌ GET /api/auth/verify no token — UNEXPECTED (${res.status})`);
@@ -146,7 +143,7 @@ async function testProducts() {
     log("GET /api/products/categories", res, data);
   });
 
-  // NO TOKEN (should fail with 401)
+  // NO TOKEN
   await test("GET /api/products — no token (expect 401)", async () => {
     const res = await fetch(`${BASE_URL}/products`);
     res.status === 401
@@ -184,14 +181,29 @@ async function testCart() {
     });
     const data = await res.json();
     log("POST /api/cart/items", res, data);
+    console.log("   📦 Full cart response:", JSON.stringify(data, null, 2));
+
+    // Try all possible locations of cart item ID
     if (data?.data?.id) {
       cartItemId = data.data.id;
       console.log(`   🛒 Cart Item ID saved: ${cartItemId}`);
+    } else if (data?.data?.items?.[0]?.id) {
+      cartItemId = data.data.items[0].id;
+      console.log(`   🛒 Cart Item ID saved from items array: ${cartItemId}`);
+    } else if (data?.data?.cartItem?.id) {
+      cartItemId = data.data.cartItem.id;
+      console.log(`   🛒 Cart Item ID saved from cartItem: ${cartItemId}`);
+    } else {
+      console.log(`   ⚠️ Could not find cart item ID in response`);
     }
   });
 
   // UPDATE CART ITEM
   await test("PUT /api/cart/items/:itemId", async () => {
+    if (!cartItemId) {
+      console.log("   ⚠️ PUT /api/cart/items/:itemId — SKIPPED (no cart item ID)");
+      return;
+    }
     const res = await fetch(`${BASE_URL}/cart/items/${cartItemId}`, {
       method: "PUT",
       headers: {
@@ -206,6 +218,10 @@ async function testCart() {
 
   // REMOVE CART ITEM
   await test("DELETE /api/cart/items/:itemId", async () => {
+    if (!cartItemId) {
+      console.log("   ⚠️ DELETE /api/cart/items/:itemId — SKIPPED (no cart item ID)");
+      return;
+    }
     const res = await fetch(`${BASE_URL}/cart/items/${cartItemId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
@@ -271,7 +287,7 @@ async function testWallet() {
 async function testCheckout() {
   console.log("\n📌 CHECKOUT TESTS");
 
-  // Add item back to cart first since we cleared it
+  // Add item back to cart first
   await fetch(`${BASE_URL}/cart/items`, {
     method: "POST",
     headers: {

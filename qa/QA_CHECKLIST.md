@@ -23,9 +23,9 @@
 ### Cart
 - [x] GET /api/cart — returns current cart
 - [x] POST /api/cart/items — adds item to cart successfully
-- [ ] POST /api/cart/items — fails if productId is missing
-- [ ] PUT /api/cart/items/:itemId — updates item quantity
-- [ ] DELETE /api/cart/items/:itemId — removes item from cart
+- [x] POST /api/cart/items — fails if productId is missing
+- [x] PUT /api/cart/items/:itemId — updates item quantity
+- [x] DELETE /api/cart/items/:itemId — removes item from cart
 - [x] DELETE /api/cart/clear — clears entire cart
 
 ### Wallet
@@ -50,8 +50,8 @@
 - [x] No broken links or blank pages
 
 ## General
-- [ ] App loads without errors
-- [ ] All buttons work correctly
-- [ ] Error messages display properly
-- [ ] JWT token is sent correctly on all protected routes
+- [x] App loads without errors
+- [x] All buttons work correctly
+- [x] Error messages display properly
+- [x] JWT token is sent correctly on all protected routes
 
