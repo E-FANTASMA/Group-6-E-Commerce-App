@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { apiRequest } from '../api/http'
+import { getAuthToken } from '../api/auth'
 
 // ── SectionCard ──────────────────────────────────────────
 function SectionCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -26,7 +28,7 @@ function PageHeader() {
 }
 
 // ── BalanceBanner ────────────────────────────────────────
-function BalanceBanner() {
+function BalanceBanner({ balance }: { balance: number }) {
   const [visible, setVisible] = useState(true)
 
   return (
@@ -44,8 +46,12 @@ function BalanceBanner() {
       <div className="relative z-10 max-w-[60%]">
         <p className="text-white text-sm font-medium mb-2">Available Balance</p>
         <div className="flex items-center gap-3">
-          <h2 className="text-white text-4xl font-bold tracking-tight">
-            {visible ? 'NGN 250,000.00' : 'NGN ••••••••'}
+        <h2 className="text-white text-4xl font-bold tracking-tight">
+            {
+              visible
+                ? `NGN ${balance.toLocaleString()}`
+                : 'NGN ••••••••'
+            }
           </h2>
           <button onClick={() => setVisible(!visible)} className="text-white hover:text-green-300 transition-colors">
             {visible ? (
@@ -68,13 +74,18 @@ function BalanceBanner() {
 // ── AmountInput ──────────────────────────────────────────
 const quickAmounts = [5000, 10000, 15000, 20000, 50000]
 
-function AmountInput() {
-  const [amount, setAmount] = useState('')
+function AmountInput({
+  amount,
+  setAmount,
+}: {
+  amount: string
+  setAmount: React.Dispatch<React.SetStateAction<string>>
+}) {
 
   const handleQuickAmount = (value: number) => {
     const current = parseFloat(amount.replace(/,/g, '')) || 0
     const newAmount = current + value
-    setAmount(newAmount.toLocaleString())
+    setAmount(String(newAmount))
   }
 
   return (
@@ -152,43 +163,40 @@ function PaymentMethodSelector() {
 }
 
 // ── RecentTransactions ───────────────────────────────────
-const transactions = [
-  { id: 1, type: 'Wallet Funding', date: 'May 11, 2026 • 10:13 AM', amount: '20,000', positive: true },
-  { id: 2, type: 'Store Payment', date: 'May 9, 2026 • 7:18 PM', amount: '65,000', positive: false },
-  { id: 3, type: 'Wallet Funding', date: 'May 2, 2026 • 5:42 PM', amount: '5,000', positive: true },
-  { id: 4, type: 'Store Payment', date: 'April 21, 2026 • 10:42 PM', amount: '160,000', positive: false },
-  { id: 5, type: 'Wallet Funding', date: 'April 9, 2026 • 08:11 AM', amount: '450,000', positive: true },
-]
 
-function RecentTransactions() {
+
+function RecentTransactions({ transactions }: { transactions: any[] }) {
   return (
     <SectionCard>
       <h2 className="text-lg font-bold text-gray-900 mb-4">Recent Transactions</h2>
       <div className="flex flex-col divide-y divide-gray-100">
-        {transactions.map((tx) => (
-          <div key={tx.id} className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${tx.positive ? 'bg-green-100' : 'bg-purple-100'}`}>
-                {tx.positive ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                )}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">{tx.type}</p>
-                <p className="text-xs text-gray-400">{tx.date}</p>
-              </div>
-            </div>
-            <span className={`text-sm font-bold ${tx.positive ? 'text-green-600' : 'text-red-600'}`}>
-              {tx.positive ? '+ ' : '- '}{tx.amount}
-            </span>
+            {transactions.map((transaction) => (
+        <div key={transaction.id}>
+          <div>
+            <strong>
+              {transaction.type === 'credit'
+                ? 'Wallet Funding'
+                : 'Store Payment'}
+            </strong>
           </div>
-        ))}
+
+          <div>
+            {new Date(transaction.created_at).toLocaleString()}
+          </div>
+
+          <div
+            style={{
+              color:
+                transaction.type === 'credit'
+                  ? 'green'
+                  : 'red',
+            }}
+          >
+            {transaction.type === 'credit' ? '+' : '-'}
+            ₦{Number(transaction.amount).toLocaleString()}
+          </div>
+        </div>
+      ))}
       </div>
     </SectionCard>
   )
@@ -246,6 +254,88 @@ function SecurityBadge() {
 // ── Main Page ────────────────────────────────────────────
 export default function WalletPage() {
   const navigate = useNavigate()
+  const [walletBalance, setWalletBalance] = useState<number>(0)
+  const [transactions, setTransactions] = useState<any[]>([])
+  const [amount, setAmount] = useState('')
+const [funding, setFunding] = useState(false)
+  useEffect(() => {
+    loadWallet()
+    loadTransactions()
+  }, [])
+  
+  async function loadWallet() {
+    try {
+      const token = getAuthToken()
+  
+      const result = await apiRequest<any>(
+        '/api/wallet',
+        {
+          token,
+        }
+      )
+  
+      if (result.success) {
+        setWalletBalance(
+          Number(result.data.balance)
+        )
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function loadTransactions() {
+    try {
+      const token = getAuthToken()
+  
+      const result = await apiRequest<any>(
+        '/api/wallet/transactions',
+        {
+          token,
+        }
+      )
+  
+      if (result.success) {
+        setTransactions(result.data)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+async function fundWallet() {
+  try {
+    setFunding(true)
+
+    const token = getAuthToken()
+
+    const result = await apiRequest<any>(
+      '/api/wallet/top-up',
+      {
+        method: 'POST',
+        token,
+        body: JSON.stringify({
+          amount: Number(amount),
+        }),
+      }
+    )
+
+    if (result.success) {
+      alert('Wallet funded successfully')
+
+      await loadWallet()
+      await loadTransactions()
+
+      setAmount('')
+    }
+  }catch (error: any) {
+  console.error(error)
+  console.log(error?.details)
+  alert(JSON.stringify(error?.details))
+} finally {
+    setFunding(false)
+  }
+}
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -255,22 +345,21 @@ export default function WalletPage() {
           <div className="bg-white rounded-2xl p-6">
             <h1 className="text-3xl font-bold text-gray-900">Fund Wallet</h1>
             <p className="text-sm text-gray-500 mt-1 mb-6">Seamless funding. Limitless shopping.</p>
-            <BalanceBanner />
-            <AmountInput />
+            <BalanceBanner balance={walletBalance} />
+            <AmountInput amount={amount} setAmount={setAmount} />
             <PaymentMethodSelector />
             <button
-              onClick={() => navigate('/account')}
+              onClick={fundWallet}
               className="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors mt-4"
             >
-              Continue to Payment
+              {funding ? 'Funding...' : 'Fund Wallet'}
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </button>
           </div>
         </div>
-        <div className="flex flex-col gap-6">
-          <RecentTransactions />
+        <div className="flex flex-col gap-6"><RecentTransactions transactions={transactions}/>
           <FundingTips />
           <SecurityBadge />
         </div>
