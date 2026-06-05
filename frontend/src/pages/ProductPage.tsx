@@ -33,8 +33,8 @@ export default function ProductPage() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-[#2b1d18] px-6 py-10 font-sans">
-        <div className="mx-auto max-w-3xl rounded-[28px] bg-[#f5f2ec] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+      <div className="min-h-screen w-full bg-[#f5f2ec] font-sans">
+        <div className="min-h-screen w-full p-8">
           <div className="mb-10 flex items-center justify-between">
             <div>
               <p className="text-sm text-[#8e857d]">Product details</p>
@@ -102,16 +102,16 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#2b1d18] px-4 py-6 sm:px-6 sm:py-10">
+    <div className="min-h-screen w-full bg-[#f5f2ec]">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plaster&family=Inter:wght@300;400;500;600;700&display=swap');
         body {
           font-family: 'Inter', sans-serif;
-          background: #2b1d18;
+          background: #f5f2ec;
         }
       `}</style>
 
-      <div className="mx-auto max-w-6xl rounded-[32px] bg-[#f5f2ec] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-8">
+      <div className="min-h-screen w-full p-5 sm:p-8">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <button
             onClick={() => navigate('/shop')}

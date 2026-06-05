@@ -30,13 +30,13 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#2b1d18] px-4 py-6 sm:px-6 sm:py-10">
+    <div className="min-h-screen w-full bg-[#f5f2ec]">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plaster&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #2b1d18; }
+        body { font-family: 'Inter', sans-serif; background: #f5f2ec; }
       `}</style>
 
-      <div className="mx-auto max-w-4xl rounded-[32px] bg-[#f5f2ec] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-8">
+      <div className="min-h-screen w-full p-6 sm:p-8">
         <button
           type="button"
           onClick={() => navigate("/account")}

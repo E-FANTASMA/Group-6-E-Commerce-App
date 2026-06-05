@@ -84,17 +84,17 @@ export default function ShopPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#2b1d18] px-4 py-6 sm:px-6 sm:py-10">
+    <div className="min-h-screen w-full bg-[#f5f2ec]">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plaster&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap');
 
         body {
           font-family: 'Inter', sans-serif;
-          background: #2b1d18;
+          background: #f5f2ec;
         }
       `}</style>
 
-      <div className="mx-auto max-w-6xl rounded-[32px] bg-[#f5f2ec] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-8">
+      <div className="min-h-screen w-full p-5 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-sm uppercase tracking-[0.28em] text-[#8d8178]">

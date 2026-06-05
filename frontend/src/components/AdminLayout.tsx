@@ -45,13 +45,13 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-[#2b1d18] px-4 py-6 sm:px-6 sm:py-8">
+    <div className="min-h-screen w-full bg-[#f5f2ec]">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plaster&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #2b1d18; }
+        body { font-family: 'Inter', sans-serif; background: #f5f2ec; }
       `}</style>
 
-      <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-[32px] bg-[#f5f2ec] shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+      <div className="flex min-h-screen w-full overflow-hidden bg-[#f5f2ec]">
         <aside className="flex w-64 shrink-0 flex-col bg-gradient-to-b from-[#1f4d34] to-[#163a28] p-5 text-white">
           <div className="mb-8 flex justify-center">
             <ValeLogo size="sm" />
