@@ -130,7 +130,7 @@ function App() {
   }
 />
         <Route path="/splash" element={<SplashPage />} />
-        <Route path="*" element={<Navigate to={token ? "/dashboard" : "/login"} replace />} />
+        <Route path="*" element={<Navigate to={token ? "/shop" : "/login"} replace />} />
       </Routes>
     </Router>
   );

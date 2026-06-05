@@ -31,7 +31,7 @@ export default function LoginPage() {
         setUserData(userData);
       }
       
-      navigate('/dashboard');
+      navigate('/shop');
     } catch (error: any) {
       alert(error?.message || 'Login failed. Please try again.');
     } finally {
