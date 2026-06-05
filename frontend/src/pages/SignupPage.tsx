@@ -76,6 +76,11 @@ export default function SignupPage() {
           box-shadow: 0 0 0 3px rgba(78,138,102,0.12);
         }
 
+        .field-input::placeholder {
+          font-size: 12px;
+          color: #b0aca6;
+        }
+
         .signup-btn {
           width: 100%;
           height: 50px;
@@ -202,7 +207,13 @@ export default function SignupPage() {
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                   </svg>
                 </span>
-                <input className="field-input" type={showPassword ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)}/>
+                <input
+                  className="field-input"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="e.g. Password1"
+                />
                 <button style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 4 }} type="button" onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b0aca6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
