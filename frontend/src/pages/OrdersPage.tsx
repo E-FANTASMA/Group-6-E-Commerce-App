@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Bell,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ClipboardList,
   Download,
   Eye,
   Home,
@@ -36,7 +33,7 @@ type Order = {
 
 
 const navItems = [
-  { label: "Dashboard", icon: Home, path: "/dashboard" },
+  { label: "Shop", icon: Home, path: "/shop" },
   { label: "Products", icon: Package, path: "/products" },
   { label: "Customers", icon: Users, path: "/customers" },
   { label: "Orders", icon: ShoppingBag, path: "/orders", active: true },
@@ -50,7 +47,6 @@ export default function OrdersPage() {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("All Status");
   const [dateRange, setDateRange] = useState("May 20, 2024 - May 26, 2024");
-  const [page, setPage] = useState(1);
   const [viewedOrder, setViewedOrder] = useState<Order | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -106,7 +102,6 @@ async function loadOrders() {
 
   function resetToFirstPage<T>(setter: Dispatch<SetStateAction<T>>, value: T) {
     setter(value);
-    setPage(1);
   }
 
 function exportOrders() {

@@ -51,7 +51,7 @@ export default function ProductsPage() {
       <h1>Products</h1>
 
       <button
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate("/admin/dashboard")}
         style={{ marginBottom: 20 }}
       >
         Back

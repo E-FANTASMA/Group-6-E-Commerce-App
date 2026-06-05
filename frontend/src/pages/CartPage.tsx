@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { ShoppingCart, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
-import type { CheckoutStep, CartItemType, ShippingOption, PromoCode, Address } from "../commerce/types";
-import { cartItems as INITIAL_CART_ITEMS, PROMO_CODES, SAVED_ADDRESSES, SHIPPING_OPTIONS } from "../commerce/data/mockData";
+import type { CheckoutStep, ShippingOption, PromoCode, Address } from "../commerce/types";
+import { PROMO_CODES, SAVED_ADDRESSES, SHIPPING_OPTIONS } from "../commerce/data/mockData";
 import { useEffect } from "react";
 import { getAuthToken } from "../api/auth";
 
@@ -206,7 +206,7 @@ Order Total: ₦${Number(
   return (
     <div className="min-h-screen bg-[#F9F6F0] text-[#4B433D]">
       <div className="max-w-5xl mx-auto px-4 py-6 flex items-center justify-between">
-        <button type="button" onClick={() => (step === "cart" ? navigate("/dashboard") : back())} className="text-sm font-bold text-[#214F34] flex items-center gap-2">
+        <button type="button" onClick={() => (step === "cart" ? navigate("/shop") : back())} className="text-sm font-bold text-[#214F34] flex items-center gap-2">
           <ArrowLeft className="w-4 h-4" />
           {step === "cart" ? "Back" : "Previous"}
         </button>
@@ -405,7 +405,7 @@ Order Total: ₦${Number(
                 <h2 className="mt-4 text-2xl font-bold font-cormorant text-[#214F34] tracking-tight">Order Confirmed</h2>
                 <p className="mt-2 text-xs text-[#8D8178]">Thanks for your order. This is the confirmation screen.</p>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                  <button type="button" onClick={() => navigate("/dashboard")} className="rounded-full bg-[#214F34] hover:bg-[#39644A] text-white font-bold py-3 px-5 text-sm">
+                  <button type="button" onClick={() => navigate("/shop")} className="rounded-full bg-[#214F34] hover:bg-[#39644A] text-white font-bold py-3 px-5 text-sm">
                     Continue shopping
                   </button>
                   <button type="button" onClick={() => setStep("cart")} className="rounded-full border border-[#E7DBD0] bg-white/80 py-3 px-5 text-sm font-bold text-[#214F34]">

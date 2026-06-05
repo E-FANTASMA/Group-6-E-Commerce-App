@@ -14,7 +14,7 @@ export default function AdminRoute({
   }
 
   if (user?.role !== 'admin') {
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/shop" replace />
   }
 
   return <>{children}</>

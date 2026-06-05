@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import SplashPage from './pages/SplashPage';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
 import ProductPage from './pages/ProductPage';
 import ShopPage from './pages/ShopPage';
@@ -24,17 +23,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} replace />} />
+        <Route path="/" element={<Navigate to={token ? "/shop" : "/login"} replace />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
-            }
-          />
+        <Route path="/dashboard" element={<Navigate to="/shop" replace />} />
         <Route
           path="/shop"
           element={
