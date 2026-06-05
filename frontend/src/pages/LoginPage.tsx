@@ -31,7 +31,8 @@ export default function LoginPage() {
         setUserData(userData);
       }
       
-      navigate('/shop');
+      const role = userData?.role || response.data?.role;
+      navigate(role === 'admin' ? '/admin/dashboard' : '/shop');
     } catch (error: any) {
       alert(error?.message || 'Login failed. Please try again.');
     } finally {

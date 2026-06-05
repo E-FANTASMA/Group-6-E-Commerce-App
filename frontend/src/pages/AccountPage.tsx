@@ -102,7 +102,7 @@ function PersonalInformation({
   )
 }
 
-function QuickActions() {
+function QuickActions({ role }: { role?: string }) {
   const navigate = useNavigate()
 
   function logout() {
@@ -112,6 +112,9 @@ function QuickActions() {
   }
 
   const actions = [
+  ...(role === 'admin'
+    ? [{ label: 'Admin Dashboard', onClick: () => navigate('/admin/dashboard') }]
+    : []),
     { label: 'My Orders', onClick: () => navigate('/orders') },
     { label: 'Fund Wallet', onClick: () => navigate('/wallet/fund') },
     { label: 'Back To Shop', onClick: () => navigate('/shop') },
@@ -180,7 +183,7 @@ export default function AccountPage() {
         <PageHeader />
         <div className="grid gap-6">
           <PersonalInformation userData={userData} onSave={handlePersonalInfoSave} />
-          <QuickActions />
+          <QuickActions role={userData.role} />
         </div>
       </div>
     </div>
