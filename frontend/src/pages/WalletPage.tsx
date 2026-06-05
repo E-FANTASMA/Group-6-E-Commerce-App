@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiRequest } from '../api/http'
-import { getAuthToken } from '../api/auth'
+import { clearAuthToken, clearUserData, getAuthToken } from '../api/auth'
 
 // ── SectionCard ──────────────────────────────────────────
 function SectionCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -16,7 +16,7 @@ function SectionCard({ children, className = '' }: { children: React.ReactNode; 
 function PageHeader() {
   return (
     <div className="flex items-center justify-between mb-8">
-      <p className="text-2xl font-bold text-gray-700">Welcome back!</p>
+      <div />
       <h1 style={{ fontFamily: "'Plaster', cursive", fontSize: '50px', lineHeight: '1' }}>
         <span style={{ color: '#4E8A66' }}>V</span>
         <span style={{ color: '#DCCFC0' }}>a</span>
@@ -257,7 +257,14 @@ export default function WalletPage() {
   const [walletBalance, setWalletBalance] = useState<number>(0)
   const [transactions, setTransactions] = useState<any[]>([])
   const [amount, setAmount] = useState('')
-const [funding, setFunding] = useState(false)
+  const [funding, setFunding] = useState(false)
+
+  function logout() {
+    clearAuthToken()
+    clearUserData()
+    navigate('/login')
+  }
+
   useEffect(() => {
     loadWallet()
     loadTransactions()
@@ -357,6 +364,20 @@ async function fundWallet() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </button>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <button
+                onClick={() => navigate('/shop')}
+                className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
+              >
+                Back To Shop
+              </button>
+              <button
+                onClick={logout}
+                className="rounded-xl bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 transition-colors hover:bg-red-100"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-6"><RecentTransactions transactions={transactions}/>
