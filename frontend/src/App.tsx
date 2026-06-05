@@ -27,18 +27,108 @@ function App() {
         <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} replace />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/customers" element={<CustomersPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+        <Route
+          path="/shop"
+          element={
+            <ProtectedRoute>
+              <ShopPage />
+            </ProtectedRoute>
+          }
+        />
+              <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+  path="/account"
+  element={
+    <ProtectedRoute>
+      <AccountPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/product/:id"
+  element={
+    <ProtectedRoute>
+      <ProductPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/orders"
+  element={
+    <ProtectedRoute>
+      <OrdersPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/admin/dashboard"
+  element={
+    <AdminRoute>
+      <AdminDashboardPage />
+    </AdminRoute>
+  }
+/>
+
+<Route
+  path="/admin/orders"
+  element={
+    <AdminRoute>
+      <AdminOrdersPage />
+    </AdminRoute>
+  }
+/>
+
+<Route
+  path="/admin/products"
+  element={
+    <AdminRoute>
+      <ProductsPage />
+    </AdminRoute>
+  }
+/>
+
+<Route
+  path="/admin/customers"
+  element={
+    <AdminRoute>
+      <CustomersPage />
+    </AdminRoute>
+  }
+/>
+
+<Route
+  path="/admin/settings"
+  element={
+    <AdminRoute>
+      <SettingsPage />
+    </AdminRoute>
+  }
+/>
         <Route path="/checkout" element={<Navigate to="/cart" replace />} />
         <Route path="/confirmation" element={<Navigate to="/cart" replace />} />
-        <Route path="/wallet/fund" element={<WalletPage />} />
+        <Route
+  path="/wallet/fund"
+  element={
+    <ProtectedRoute>
+      <WalletPage />
+    </ProtectedRoute>
+  }
+/>
         <Route path="/splash" element={<SplashPage />} />
         <Route path="*" element={<Navigate to={token ? "/dashboard" : "/login"} replace />} />
       </Routes>
